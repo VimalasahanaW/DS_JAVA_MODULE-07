@@ -28,41 +28,58 @@ RegisterNumber:  212223040241
 */
 import java.util.Scanner;
 
-public class LongestNestedSet {
-    static int arrayNesting(int[] nums) {
-        int n = nums.length;
-        boolean[] visited = new boolean[n];
-        int maxSize = 0;
-        for (int i = 0; i < n; i++) {
+class LongestSet {
+
+    public static int longestSetLength(int[] nums) {
+        boolean[] visited = new boolean[nums.length];
+        int maxLength = 0;
+
+        for (int i = 0; i < nums.length; i++) {
             if (!visited[i]) {
-                int size = 0;
+                int count = 0;
                 int current = i;
+
+                // Continue until a repeated element appears
                 while (!visited[current]) {
                     visited[current] = true;
                     current = nums[current];
-                    size++;
+                    count++;
                 }
-                if (size > maxSize) maxSize = size;
+
+                maxLength = Math.max(maxLength, count);
             }
         }
-        return maxSize;
+
+        return maxLength;
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter number of elements: ");
+
+        // Taking user input for array size
+        System.out.print("Enter the array size: ");
         int n = sc.nextInt();
+
         int[] nums = new int[n];
-        System.out.println("Enter the permutation array elements (0-based indices):");
-        for (int i = 0; i < n; i++) nums[i] = sc.nextInt();
-        int result = arrayNesting(nums);
-        System.out.println("Longest length of nested set: " + result);
+
+        // Taking user input for array elements
+        System.out.println("Enter " + n + " elements:");
+        for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt();
+        }
+
+        // Calling function
+        int result = longestSetLength(nums);
+        System.out.println("Maximum size of S[k] = " + result);
+
         sc.close();
     }
 }
+
+   
 ```
 ## OUTPUT
-<img width="927" height="151" alt="image" src="https://github.com/user-attachments/assets/566b48c5-e998-4d5a-8ecf-8b3f06f7222e" />
+<img width="529" height="271" alt="image" src="https://github.com/user-attachments/assets/76cb8b74-ce8b-4ff3-9e10-d2f7b8b05b6d" />
 
 ## RESULT
 The program successfully computes the longest length of the nested set s[k] for the given permutation array.
